@@ -8,9 +8,6 @@ The array is encapsulated in a `Array` struct for chaining methods and doing "fu
 
 ## Installation and usage
 
-
-The import path for the package is *gopkg.in/yaml.v3*.
-
 To install it, run:
 
     go get github.com/drouian-m/array-utils
