@@ -1,4 +1,4 @@
-package arrayutils
+package array
 
 import (
 	"testing"
@@ -101,4 +101,65 @@ func TestArray_FindIndexStructNotFound(t *testing.T) {
 		return val.lastname == "Doe"
 	})
 	assert.Equal(t, -1, found)
+}
+
+func TestArray_FilterString(t *testing.T) {
+	filtered := strArr.Filter(func(val string) bool {
+		return val != "b"
+	})
+	assert.Equal(t, []string{"a", "c"}, filtered.Arr)
+}
+
+func TestArray_FilterInt(t *testing.T) {
+	filtered := intArr.Filter(func(val int) bool {
+		return val != 2
+	})
+	assert.Equal(t, []int{1, 3}, filtered.Arr)
+}
+
+func TestArray_FilterStruct(t *testing.T) {
+	filtered := structArr.Filter(func(val Person) bool {
+		return val.lastname != "Wilcox"
+	})
+	assert.Equal(t, []Person{
+		{"Murphy", "Dunne"},
+		{"Esha", "Parker"},
+	}, filtered.Arr)
+}
+
+func TestArray_MapString(t *testing.T) {
+	newarr := strArr.Map(func(val string) string {
+		return val + val
+	})
+	assert.Equal(t, []string{"aa", "bb", "cc"}, newarr.Arr)
+}
+
+func TestArray_MapInt(t *testing.T) {
+	filtered := intArr.Map(func(val int) int {
+		return val * 2
+	})
+	assert.Equal(t, []int{2, 4, 6}, filtered.Arr)
+}
+
+func TestArray_MapStruct(t *testing.T) {
+	filtered := structArr.Map(func(val Person) Person {
+		tempLast := val.lastname
+		val.lastname = val.firstname
+		val.firstname = tempLast
+		return val
+	})
+	assert.Equal(t, []Person{
+		{"Dunne", "Murphy"},
+		{"Wilcox", "Alexa"},
+		{"Parker", "Esha"},
+	}, filtered.Arr)
+}
+
+func TestArray_MapChaining(t *testing.T) {
+	result := intArr.Map(func(val int) int {
+		return val * 3
+	}).Filter(func(val int) bool {
+		return val%2 == 0
+	})
+	assert.Equal(t, []int{6}, result.Arr)
 }

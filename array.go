@@ -1,4 +1,4 @@
-package arrayutils
+package array
 
 // Array - Encapsulate array type in a generic struct
 //
