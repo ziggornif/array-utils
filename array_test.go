@@ -1,0 +1,104 @@
+package arrayutils
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+type Person struct {
+	firstname string
+	lastname  string
+}
+
+var strArr = Array[string]{[]string{"a", "b", "c"}}
+var intArr = Array[int]{[]int{1, 2, 3}}
+var structArr = Array[Person]{[]Person{
+	{"Murphy", "Dunne"},
+	{"Alexa", "Wilcox"},
+	{"Esha", "Parker"},
+}}
+
+func TestArray_FindString(t *testing.T) {
+	found := strArr.Find(func(val string) bool {
+		return val == "b"
+	})
+	assert.Equal(t, "b", found)
+}
+
+func TestArray_FindStringNotFound(t *testing.T) {
+	found := strArr.Find(func(val string) bool {
+		return val == "d"
+	})
+	assert.Equal(t, "", found)
+}
+
+func TestArray_FindInt(t *testing.T) {
+	found := intArr.Find(func(val int) bool {
+		return val == 2
+	})
+	assert.Equal(t, 2, found)
+}
+
+func TestArray_FindIntNotFound(t *testing.T) {
+	found := intArr.Find(func(val int) bool {
+		return val == 4
+	})
+	assert.Equal(t, 0, found)
+}
+
+func TestArray_FindStruct(t *testing.T) {
+	found := structArr.Find(func(val Person) bool {
+		return val.lastname == "Wilcox"
+	})
+	assert.Equal(t, Person{"Alexa", "Wilcox"}, found)
+}
+
+func TestArray_FindStructNotFound(t *testing.T) {
+	found := structArr.Find(func(val Person) bool {
+		return val.lastname == "Doe"
+	})
+	assert.Equal(t, Person{}, found)
+}
+
+func TestArray_FindIndexString(t *testing.T) {
+	found := strArr.FindIndex(func(val string) bool {
+		return val == "b"
+	})
+	assert.Equal(t, 1, found)
+}
+
+func TestArray_FindIndexStringNotFound(t *testing.T) {
+	found := strArr.FindIndex(func(val string) bool {
+		return val == "d"
+	})
+	assert.Equal(t, -1, found)
+}
+
+func TestArray_FindIndexInt(t *testing.T) {
+	found := intArr.FindIndex(func(val int) bool {
+		return val == 2
+	})
+	assert.Equal(t, 1, found)
+}
+
+func TestArray_FindIndexNotFound(t *testing.T) {
+	found := intArr.FindIndex(func(val int) bool {
+		return val == 4
+	})
+	assert.Equal(t, -1, found)
+}
+
+func TestArray_FindIndexStruct(t *testing.T) {
+	found := structArr.FindIndex(func(val Person) bool {
+		return val.lastname == "Wilcox"
+	})
+	assert.Equal(t, 1, found)
+}
+
+func TestArray_FindIndexStructNotFound(t *testing.T) {
+	found := structArr.FindIndex(func(val Person) bool {
+		return val.lastname == "Doe"
+	})
+	assert.Equal(t, -1, found)
+}
