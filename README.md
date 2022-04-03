@@ -6,6 +6,10 @@ This package provides useful array operations functions such as can be found in 
 
 The native array is encapsulated in a `Array` struct for chaining methods and doing "functional" programming.
 
+## Requirements
+
+Go >= 1.18 version.
+
 ## Installation
 
 To install it, run:
