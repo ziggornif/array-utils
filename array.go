@@ -13,13 +13,23 @@ package array
 //  })
 // => result [6 12]
 type Array[T any] struct {
-	Arr []T
+	arr []T
+}
+
+// NewArray - Create a new Array item
+func NewArray[T any](array []T) *Array[T] {
+	return &Array[T]{array}
+}
+
+// ToNative - Return the native Go array
+func (a *Array[T]) ToNative() []T {
+	return a.arr
 }
 
 // Find - Find a value in the current array
 func (a *Array[T]) Find(f func(T) bool) T {
 	var notfound T
-	for _, val := range a.Arr {
+	for _, val := range a.arr {
 		if f(val) {
 			return val
 		}
@@ -29,7 +39,7 @@ func (a *Array[T]) Find(f func(T) bool) T {
 
 // FindIndex - Find value index in the current array
 func (a *Array[T]) FindIndex(f func(T) bool) int {
-	for i, val := range a.Arr {
+	for i, val := range a.arr {
 		if f(val) {
 			return i
 		}
@@ -40,7 +50,7 @@ func (a *Array[T]) FindIndex(f func(T) bool) int {
 // Filter - Filter array values (chainable)
 func (a *Array[T]) Filter(f func(T) bool) *Array[T] {
 	var filtered []T
-	for _, val := range a.Arr {
+	for _, val := range a.arr {
 		if f(val) {
 			filtered = append(filtered, val)
 		}
@@ -51,7 +61,7 @@ func (a *Array[T]) Filter(f func(T) bool) *Array[T] {
 // Map - Create a new array populated with the result of calling the input func on each array element (chainable)
 func (a *Array[T]) Map(f func(T) T) *Array[T] {
 	var filtered []T
-	for _, val := range a.Arr {
+	for _, val := range a.arr {
 		filtered = append(filtered, f(val))
 	}
 	return &Array[T]{filtered}

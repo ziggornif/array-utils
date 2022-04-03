@@ -11,13 +11,19 @@ type Person struct {
 	lastname  string
 }
 
-var strArr = Array[string]{[]string{"a", "b", "c"}}
-var intArr = Array[int]{[]int{1, 2, 3}}
-var structArr = Array[Person]{[]Person{
+var strArr = NewArray([]string{"a", "b", "c"})
+var intArr = NewArray([]int{1, 2, 3})
+var structArr = NewArray([]Person{
 	{"Murphy", "Dunne"},
 	{"Alexa", "Wilcox"},
 	{"Esha", "Parker"},
-}}
+})
+
+func TestNewArray(t *testing.T) {
+	nativeArr := []int{1, 2, 3}
+	arr := NewArray(nativeArr)
+	assert.Equal(t, nativeArr, arr.ToNative())
+}
 
 func TestArray_FindString(t *testing.T) {
 	found := strArr.Find(func(val string) bool {
@@ -107,14 +113,14 @@ func TestArray_FilterString(t *testing.T) {
 	filtered := strArr.Filter(func(val string) bool {
 		return val != "b"
 	})
-	assert.Equal(t, []string{"a", "c"}, filtered.Arr)
+	assert.Equal(t, []string{"a", "c"}, filtered.ToNative())
 }
 
 func TestArray_FilterInt(t *testing.T) {
 	filtered := intArr.Filter(func(val int) bool {
 		return val != 2
 	})
-	assert.Equal(t, []int{1, 3}, filtered.Arr)
+	assert.Equal(t, []int{1, 3}, filtered.ToNative())
 }
 
 func TestArray_FilterStruct(t *testing.T) {
@@ -124,21 +130,21 @@ func TestArray_FilterStruct(t *testing.T) {
 	assert.Equal(t, []Person{
 		{"Murphy", "Dunne"},
 		{"Esha", "Parker"},
-	}, filtered.Arr)
+	}, filtered.ToNative())
 }
 
 func TestArray_MapString(t *testing.T) {
 	newarr := strArr.Map(func(val string) string {
 		return val + val
 	})
-	assert.Equal(t, []string{"aa", "bb", "cc"}, newarr.Arr)
+	assert.Equal(t, []string{"aa", "bb", "cc"}, newarr.ToNative())
 }
 
 func TestArray_MapInt(t *testing.T) {
 	filtered := intArr.Map(func(val int) int {
 		return val * 2
 	})
-	assert.Equal(t, []int{2, 4, 6}, filtered.Arr)
+	assert.Equal(t, []int{2, 4, 6}, filtered.ToNative())
 }
 
 func TestArray_MapStruct(t *testing.T) {
@@ -152,7 +158,7 @@ func TestArray_MapStruct(t *testing.T) {
 		{"Dunne", "Murphy"},
 		{"Wilcox", "Alexa"},
 		{"Parker", "Esha"},
-	}, filtered.Arr)
+	}, filtered.ToNative())
 }
 
 func TestArray_MapChaining(t *testing.T) {
@@ -161,5 +167,5 @@ func TestArray_MapChaining(t *testing.T) {
 	}).Filter(func(val int) bool {
 		return val%2 == 0
 	})
-	assert.Equal(t, []int{6}, result.Arr)
+	assert.Equal(t, []int{6}, result.ToNative())
 }
