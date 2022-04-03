@@ -66,7 +66,7 @@ func main() {
 	result := myarr.Map(func(val int) int {
 		return val * 3
 	}).Filter(func(val int) bool {
-		return val%2 == 0
+		return val % 2 == 0
 	})
 	fmt.Println(result.ToNative()) // => [6 12]
 }
