@@ -37,6 +37,7 @@ func main() {
 - FindIndex : Find value index in the current array
 - Filter : Filter array values (chainable)
 - Map : Create a new array populated with the result of calling the input func on each array element (chainable)
+- ForEach : Execute the input function on each array element
 
 ### Retrieve native Go array
 
