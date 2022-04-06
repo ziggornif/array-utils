@@ -66,3 +66,10 @@ func (a *Array[T]) Map(f func(T) T) *Array[T] {
 	}
 	return &Array[T]{filtered}
 }
+
+// ForEach - Execute the input function on each array element
+func (a *Array[T]) ForEach(f func(T)) {
+	for _, val := range a.arr {
+		f(val)
+	}
+}

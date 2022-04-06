@@ -161,6 +161,30 @@ func TestArray_MapStruct(t *testing.T) {
 	}, filtered.ToNative())
 }
 
+func TestArray_ForEachString(t *testing.T) {
+	var counter = 0
+	strArr.ForEach(func(val string) {
+		assert.Equal(t, strArr.ToNative()[counter], val)
+		counter += 1
+	})
+}
+
+func TestArray_ForEachInt(t *testing.T) {
+	var counter = 0
+	intArr.ForEach(func(val int) {
+		assert.Equal(t, intArr.ToNative()[counter], val)
+		counter += 1
+	})
+}
+
+func TestArray_ForEachStruct(t *testing.T) {
+	var counter = 0
+	structArr.ForEach(func(val Person) {
+		assert.Equal(t, structArr.ToNative()[counter].lastname, val.lastname)
+		counter += 1
+	})
+}
+
 func TestArray_MapChaining(t *testing.T) {
 	result := intArr.Map(func(val int) int {
 		return val * 3
