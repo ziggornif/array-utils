@@ -1,5 +1,14 @@
 # Go array utils
 
+[![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/drouian-m/array-utils)](https://github.com/drouian-m/array-utils)
+[![GoDoc reference example](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/drouian-m/array-utils)
+
+[![CodeFactor](https://www.codefactor.io/repository/github/drouian-m/array-utils/badge)](https://www.codefactor.io/repository/github/drouian-m/array-utils)
+[![Go Report Card](https://goreportcard.com/badge/github.com/drouian-m/array-utils)](https://goreportcard.com/report/github.com/drouian-m/array-utils)
+[![test](https://github.com/drouian-m/array-utils/workflows/test/badge.svg)](https://github.com/drouian-m/array-utils/actions?query=workflow%test)
+
+---
+
 ## Description
 
 This package provides useful array operations functions such as can be found in the javascript and java languages.
